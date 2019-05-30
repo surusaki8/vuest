@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>vue.study</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <span v-bind:title="message">
+      <button v-on:click="show">{{ btnTag }}</button></span><br>
+      <span v-if=seen>
+          <ol>
+              <li v-for="content in contents">
+                  {{content.text}}
+              </li>
+          </ol>
+      </span>
+  </div>
+</body>
+<script>
+var app = new Vue({
+  el: '#app',
+  data:{
+    btnTag: '表示する',
+    message: 'baha' + new Date().toLocaleString() ,
+    seen: false,
+    contents: [
+      {text: 'あほがみるぶたのけつそこまで見るか！？'},
+      {text: 'あめま'},
+      {text: 'おににに'},
+      {text: 'かちゃちゃちゃ'},
+      {text: 'どしたｍｍなんｆｋｓｆｇｊｌｓｄｆ'},
+    ]
+  },
+  methods:{
+    show: function() {
+      if(this.seen == false){
+        this.seen = true;
+        this.btnTag = '閉じる';
+      } else if(this.seen == true){
+        this.seen = false;
+        this.btnTag = '表示';
+      }
+    }
+  },
+});
+</script>
+</html>

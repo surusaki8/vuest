@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>My  first Vue app</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <h1>Vue.js</h1>
+  <div id="app">
+    {{ message }}
+  </div>
+  <hr>
+  <input type="text" onInput="doAction(event);">
+  
+  <script>
+  var data = {
+    message: 'Please type!'
+  };
+  var app = new Vue({
+    el: '#app',
+    data: data,
+  })
+  function doAction(event){
+    data.message = event.target.value;
+    if(data.message == ""){
+      data.message = 'Please type!';
+    }
+  }
+  </script>
+  
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>testform</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <form action="#" method="post">
+      <p>{{ name }}<input type="text" name="name" required></p>
+      <p>{{ tel }}<input type="tel" name="tel" required></p>
+      <div>{{ select }}</div>
+      <p><input type="radio" name="head" id="tomson">トムソン</p>
+      <p><input type="radio" name="head" id="repare">リペア</p>
+      <p><input type="radio" name="head" id="other">その他</p>
+      <p><input type="textarea" name="message" required></p>
+      <div><button type="submit">送信</button></div>
+    </form>
+  </div>
+  <script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      name: '名前',
+      tel: '連絡先',
+      select: '選んで',
+      seen = false,
+    },
+  });
+  </script>
+</body>
+</html>

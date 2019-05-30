@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>conponent</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="myVue">
+    <div v-bind:style="{ fontSize: postFontSize +'em' }">
+    {{ message }}{{ postFontSize }}
+    <div>{{searchText}}</div>
+    <div><custom-input v-bind:value="searchText"
+    v-on:input="searchText= $event"></custom-input></div>
+    <button-counter title-text='くりぽ'></button-counter>
+    <button-counter title-text='くりぽ数'></button-counter>
+    <button-counter v-for="post in posts" v-bind:post = "post" v-on:enlarge-text="fontSizeChenge"></button-counter>
+    <div v-for="post in posts">
+      {{ post.id }} {{ post.titleText }}
+    <slot-component>だよ。</slot-component>
+  </div>
+
+  <script>
+    Vue.component('slot-component', {
+      template:`
+        <div>
+            <slot></slot>
+          <strong>hoge</strong>
+          <slot></slot>
+        </div>
+      `
+    })
+    Vue.component('custom-input', {
+      props:['value'],
+      template:`
+      <input v-bind:value="value"
+      v-on:input="$emit('input', $event.target.value)" >
+      `
+    });
+    Vue.component ('button-counter',{
+      data: function(){
+        return {
+          click:0,
+          searchText: 'searchText',
+        }
+      },
+      props: [
+        'post',
+      ],
+      template: `
+        <div>
+            <div>{{searchText}}</div>
+            <div>
+              <input v-model="searchText">
+            </div>
+          <button v-on:click="$emit('enlarge-text', 0.1)">
+            Enlarge text
+          </button>
+          <button v-on:click="click ++">
+            {{post.titleText}}:{{post.content}}：{{ click }}
+          </button>
+        </div>
+        <div></div>
+        `,
+    });
+
+    var myVue = new Vue({
+      el: '#myVue',
+      data: {
+        searchText: 'searchText',
+        postFontSize: 2,
+        message: 'Hello Vue',
+        posts: [
+        { id: 1, 'titleText': 'hoge' , 'content': 'hほげ'},
+        { id: 2, 'titleText': 'geho' , 'content': 'hげ'},
+        { id: 3, 'titleText': 'piyo' , 'content': 'hほ'},
+        ],
+      },
+      methods: {
+        fontSizeChenge: function(event) {
+          this.postFontSize += event;
+        }
+      }
+    });
+
+    
+  </script>
+</body>
+</html>
